@@ -13,21 +13,8 @@ $cnx = $gestionBDD->connect();
 
 // Création de l'objet GestionClub pour manipuler les clubs
 $gestionClub = new GestionClub($cnx);
+$clubs = $gestionClub->getAllClubs(); // Suppose que vous avez une méthode pour récupérer tous les clubs
 
-// Récupération des clubs
-$clubs = $gestionClub->getAllClubs();
-
-// Affichage des clubs dans un tableau HTML
-echo "<h1>Clubs de Ligue 1</h1>";
-echo "<table border='1' cellpadding='5'>";
-echo "<tr><th>Nom du Club</th><th>Ligue</th></tr>";
-
-foreach ($clubs as $club) {
-    echo "<tr>";
-    echo "<td>" . htmlspecialchars($club['NOM_CLUB']) . "</td>";
-    echo "<td>" . htmlspecialchars($club['LIGUE_CLUB']) . "</td>";
-    echo "</tr>";
-}
-
-echo "</table>";
+// Inclure la vue
+require_once __DIR__ . '/../views/page1_view.php';
 ?>

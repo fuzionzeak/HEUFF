@@ -1,16 +1,47 @@
-/* Centrer le formulaire verticalement et horizontalement */
-body {
-    font-family: 'Helvetica Neue', Arial, sans-serif;
-    background-color: #f0f0f5;
+/* Style du header */
+header {
+    background-color: #007aff;
+    padding: 15px 0;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    text-align: center; /* Centrer le contenu du menu */
+}
+
+/* Style du menu de navigation */
+.menu {
+    display: inline-block; /* Pour que le menu occupe la largeur nécessaire */
+    list-style-type: none;
     margin: 0;
     padding: 0;
+}
+
+.menu li {
+    display: inline;
+    margin: 0 15px;
+}
+
+.menu li a {
+    text-decoration: none;
+    color: white;
+    font-size: 18px;
+    font-weight: bold;
+    transition: color 0.3s ease;
+}
+
+.menu li a:hover {
+    color: #ddd;
+}
+
+/* Centrer le contenu du formulaire sans affecter le menu */
+main {
     display: flex;
     justify-content: center;
     align-items: center;
-    min-height: 100vh; /* Hauteur minimale pour s'adapter à la taille de l'écran */
+    min-height: 100vh;
+    padding: 20px;
+    box-sizing: border-box;
 }
 
-/* Largeur maximale du formulaire */
 form {
     background: white;
     padding: 40px;
@@ -18,7 +49,7 @@ form {
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
     max-width: 400px;
     width: 100%;
-    margin: 20px; /* Ajout de marge pour éviter que le formulaire soit trop collé */
+    margin: 20px;
 }
 
 /* Organisation des clubs en deux colonnes */
@@ -30,7 +61,7 @@ form {
 }
 
 .clubs-preferes label {
-    width: 45%; /* Chaque club occupe environ 45% de la largeur (pour 2 colonnes) */
+    width: 30%; /* Chaque club occupe environ 30% de la largeur (pour 2 colonnes) */
     margin-bottom: 10px;
     display: flex;
     align-items: center;

@@ -1,0 +1,141 @@
+/* Centrer le formulaire verticalement et horizontalement */
+body {
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    background-color: #f0f0f5;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh; /* Hauteur minimale pour s'adapter à la taille de l'écran */
+}
+
+/* Largeur maximale du formulaire */
+form {
+    background: white;
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    max-width: 400px;
+    width: 100%;
+    margin: 20px; /* Ajout de marge pour éviter que le formulaire soit trop collé */
+}
+
+/* Organisation des clubs en deux colonnes */
+.clubs-preferes {
+    display: flex;
+    flex-wrap: wrap; /* Retour à la ligne automatique si l'espace est insuffisant */
+    justify-content: space-between; /* Espacement égal entre les colonnes */
+    margin-bottom: 20px;
+}
+
+.clubs-preferes label {
+    width: 45%; /* Chaque club occupe environ 45% de la largeur (pour 2 colonnes) */
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+}
+
+.clubs-preferes input[type="checkbox"] {
+    margin-right: 8px;
+}
+
+
+
+/* Style du titre */
+h1 {
+    font-size: 24px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+/* Style des liens */
+ul {
+    list-style-type: none;
+    padding-left: 0;
+    text-align: center;
+}
+
+ul li {
+    margin: 10px 0;
+}
+
+ul li a {
+    text-decoration: none;
+    color: #007aff;
+    font-size: 18px;
+    transition: color 0.3s;
+}
+
+ul li a:hover {
+    color: #005bb5;
+}
+
+
+/* Style des labels */
+label {
+    font-weight: bold;
+    color: #333;
+    display: block;
+    margin-bottom: 8px;
+}
+
+/* Style des champs de saisie */
+input[type="text"],
+input[type="password"],
+input[type="file"],
+select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    font-size: 16px;
+    transition: border-color 0.3s ease;
+}
+
+/* Champ de saisie focus */
+input[type="text"]:focus,
+input[type="password"]:focus,
+input[type="file"]:focus,
+select:focus {
+    border-color: #007aff;
+}
+
+/* Boutons de soumission */
+button {
+    width: 100%;
+    padding: 10px;
+    background-color: #007aff;
+    color: white;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #005bb5;
+}
+
+/* Checkbox */
+input[type="checkbox"] {
+    margin-right: 10px;
+}
+
+/* Style des messages de succès ou d'erreur */
+.success-message,
+.error-message {
+    text-align: center;
+    font-size: 14px;
+    margin-top: 10px;
+}
+
+.success-message {
+    color: #28a745;
+}
+
+.error-message {
+    color: #dc3545;
+}

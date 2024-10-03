@@ -3,14 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <title>Accueil</title>
+    <link rel="stylesheet" href="/HEUFF/css/style.css">
 </head>
 <body>
 
 <!-- Liens vers les différentes pages contrôleur -->
 <nav>
     <ul>
-        <li><a href="index.php?page=page1">Voir Page 1</a></li>
-        <li><a href="index.php?page=page2">Voir Page 2</a></li>
+        <li><a href="index.php?page=page1">Liste des clubs</a></li>
+        <li><a href="index.php?page=page2">S'inscrire</a></li>
         <li><a href="index.php?page=page3">Voir Page 3</a></li>
     </ul>
 </nav>

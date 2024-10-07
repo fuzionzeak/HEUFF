@@ -10,10 +10,13 @@
 <!-- Liens vers les différentes pages contrôleur -->
 <header>
     <nav>
+    <div class="logo">
+        <img src="/HEUFF/images/Logo_Ligue1.png" alt="Logo Ligue 1">
+    </div>
         <ul class="menu">
             <li><a href="index.php?page=page1">Liste des clubs</a></li>
             <li><a href="index.php?page=page2">S'inscrire</a></li>
-            <li><a href="index.php?page=page3">Voir Page 3</a></li>
+            <li><a href="index.php?page=page3">Se connecter</a></li>
         </ul>
     </nav>
 </header>

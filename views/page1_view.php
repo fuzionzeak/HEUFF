@@ -7,7 +7,7 @@
 </head>
 <body>
 
-<h1>Liste des clubs</h1>
+<h1>Liste des clubs de foot</h1>
 
 <table>
     <thead>

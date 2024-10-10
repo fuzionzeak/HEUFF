@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 /* Style du body avec un background sombre */
 body {
     background-color: #1a1a1a; /* Fond sombre (presque noir) */
@@ -229,3 +230,236 @@ table {
     margin-right: 30px; /* Marge à droite pour espacer le tableau */
     float: right; /* Aligner le tableau à droite */
 }
+=======
+/* Style du body avec un background sombre */
+body {
+    background-color: #1a1a1a; /* Fond sombre (presque noir) */
+    color: #f0f0f0; /* Texte principal en gris clair pour un bon contraste */
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+/* Style du header */
+header {
+    background-color: #262626; /* Gris très foncé */
+    padding: 15px 0;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    text-align: center;
+}
+
+/* Style pour le logo */
+.logo img {
+    height: 50px;                /* Ajustez la taille de l'image */
+    margin-left: 20px;            /* Un peu de marge à gauche si nécessaire */
+}
+
+/* Style du menu de navigation */
+.menu {
+    display: inline-block;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+.menu li {
+    display: inline;
+    margin: 0 15px;
+}
+
+.menu li a {
+    text-decoration: none;
+    color: #f0f0f0; /* Texte en gris clair */
+    font-size: 18px;
+    font-weight: bold;
+    transition: color 0.3s ease;
+}
+
+.menu li a:hover {
+    color: #a5a5a5; /* Texte légèrement éclairci au hover */
+}
+
+/* Centrer le contenu du formulaire */
+main {
+    display: flex;
+    justify-content: center;    /* Centre horizontalement */
+    align-items: center;        /* Centre verticalement */
+    min-height: 100vh;          /* Hauteur minimale de 100% de la vue */
+    padding: 20px;
+    box-sizing: border-box;
+    background-color: #1a1a1a;  /* Fond sombre */
+}
+
+form {
+    background: #262626;        /* Fond gris très foncé pour se fondre avec le background sombre */
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.3); /* Ombre légère */
+    max-width: 400px;           /* Largeur maximale du formulaire */
+    width: 100%;                /* S'étend jusqu'à 100% de l'espace disponible */
+    margin: 20px;
+    color: #f0f0f0;             /* Couleur du texte à l'intérieur du formulaire */
+}
+
+
+
+/* Organisation des clubs en deux colonnes */
+.clubs-preferes {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.clubs-preferes label {
+    width: 30%; 
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+}
+
+.clubs-preferes input[type="checkbox"] {
+    margin-right: 8px;
+}
+
+/* Style du titre */
+h1 {
+    font-size: 24px;
+    margin-bottom: 20px;
+    text-align: center;
+    color: #f0f0f0; /* Titre en gris clair */
+}
+
+/* Style des liens */
+ul {
+    list-style-type: none;
+    padding-left: 0;
+    text-align: center;
+}
+
+ul li {
+    margin: 10px 0;
+}
+
+ul li a {
+    text-decoration: none;
+    color: #f0f0f0; /* Couleur des liens */
+    font-size: 18px;
+    transition: color 0.3s;
+}
+
+ul li a:hover {
+    color: #b3b3b3; /* Liens éclaircis au hover */
+}
+
+/* Style des labels */
+label {
+    font-weight: bold;
+    color: #f0f0f0; /* Labels en gris clair */
+    display: block;
+    margin-bottom: 8px;
+}
+
+/* Style des champs de saisie */
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="file"],
+select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #444; /* Bordure gris moyen */
+    border-radius: 5px;
+    margin-bottom: 20px;
+    font-size: 16px;
+    background-color: #333; /* Fond des champs de saisie en gris foncé */
+    color: #f0f0f0; /* Texte en gris clair */
+    transition: border-color 0.3s ease, background-color 0.3s ease;
+}
+
+/* Champ de saisie focus */
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="password"]:focus,
+input[type="file"]:focus,
+select:focus {
+    border-color: #007aff; /* Bordure bleue au focus */
+    background-color: #3d3d3d; /* Fond légèrement éclairci au focus */
+}
+
+/* Boutons de soumission */
+button {
+    width: 100%;
+    padding: 12px;
+    background-color: #007aff; /* Bleu pour le bouton */
+    color: white;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #005bb5; /* Bleu plus foncé au hover */
+}
+
+/* Checkbox */
+input[type="checkbox"] {
+    margin-right: 10px;
+}
+
+/* Style des messages de succès ou d'erreur */
+.success-message,
+.error-message {
+    text-align: center;
+    font-size: 14px;
+    margin-top: 10px;
+}
+
+.success-message {
+    color: #28a745; /* Vert pour le succès */
+}
+
+.error-message {
+    color: #dc3545; /* Rouge pour les erreurs */
+}
+
+/* TABLEAU PAGE 1 */
+/* Style pour les tableaux */
+table {
+    width: 50%; /* Réduire la largeur du tableau à 50% de la page */
+    border-collapse: collapse;
+    margin: 25px 0;
+    font-size: 16px; /* Réduire un peu la taille de la police pour prendre moins de place */
+    text-align: left;
+    margin-right: auto; /* Pour aligner le tableau à droite */
+    margin-left: auto;  /* Centrer le tableau si vous le voulez centré, sinon enlevez */
+}
+
+th, td {
+    padding: 8px 12px; /* Réduire la taille des cellules */
+    border: 1px solid #444; /* Bordure gris foncé pour un style plus sobre */
+}
+
+th {
+    background-color: #333; /* En-tête en gris foncé */
+    color: #f0f0f0; /* Texte en gris clair pour l'en-tête */
+}
+
+tr:nth-child(even) {
+    background-color: #2a2a2a; /* Gris très foncé pour les lignes paires */
+}
+
+tr:hover {
+    background-color: #3a3a3a; /* Lignes légèrement éclaircies au hover */
+    cursor: pointer;
+}
+
+/* Ajouter une marge à droite pour ne pas coller le tableau au bord droit */
+table {
+    margin-right: 30px; /* Marge à droite pour espacer le tableau */
+    float: right; /* Aligner le tableau à droite */
+}
+>>>>>>> 45817e33f25d270d1a9a29bf228b1b53a0ac5675

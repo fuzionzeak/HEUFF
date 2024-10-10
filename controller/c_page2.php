@@ -1,5 +1,7 @@
 <?php
 
+error_reporting(E_ALL);
+ini_set("display_errors", 1);
 require_once __DIR__ . '/../model/GestionBDD.php';
 require_once __DIR__ . '/../model/GestionClub.php';
 
@@ -13,81 +15,83 @@ $cnx = $gestionBDD->connect();
 // Création de l'objet GestionClub pour manipuler les clubs
 $gestionClub = new GestionClub($cnx);
 
-// Récupération des clubs pour les afficher en boutons
+// Récupération des clubs pour les afficher dans le formulaire
 $clubs = $gestionClub->getAllClubs();
+if (empty($clubs)) {
+    echo "Erreur : aucun club trouvé dans la base de données.";
+}
 
-// ID_CLUB par défaut (doit correspondre à un club existant)
-$idClubParDefaut = 1; // Changez ce numéro par un ID valide existant dans votre base
 
-// Traitement du formulaire d'inscription
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Récupération des données du formulaire
+
     $nom = $_POST['nom'] ?? '';
     $prenom = $_POST['prenom'] ?? '';
+    $email = $_POST['email'] ?? '';
     $sexe = $_POST['sexe'] ?? '';
-    $password = password_hash($_POST['password'] ?? '', PASSWORD_BCRYPT); // Hash du mot de passe pour la sécurité
-    $clubsChoisis = $_POST['clubs'] ?? [];
+    $password = $_POST['password'] ?? '';
+    $password_confirm = $_POST['password_confirm'] ?? '';
+    $club_principal = $_POST['club_principal'] ?? '';
     $image = $_FILES['image'] ?? null;
+    $club_principal = $_POST['club_principal'] ?? '';
 
-    // Utiliser le premier club sélectionné ou un club par défaut s'il n'y a rien
-    $idClub = !empty($clubsChoisis) ? (int)$clubsChoisis[0] : $idClubParDefaut;
-
-    // Vérification que l'ID_CLUB existe dans la table CLUB
-    $stmtCheckClub = $cnx->prepare("SELECT COUNT(*) FROM CLUB WHERE ID_CLUB = :id_club");
-    $stmtCheckClub->bindParam(':id_club', $idClub, PDO::PARAM_INT);
-    $stmtCheckClub->execute();
-    $clubExists = $stmtCheckClub->fetchColumn() > 0;
-
-    if (!$clubExists) {
-        // Si l'ID_CLUB n'est pas valide, utilisez l'ID par défaut
-        $idClub = $idClubParDefaut;
+    if (empty($club_principal) || $club_principal == '0') {
+        echo "Erreur : veuillez sélectionner un club principal valide.";
+        return;
     }
 
-    // Traitement de l'image de profil (sauvegarde dans un dossier, etc.)
-    $imagePath = '';
-    if ($image && $image['error'] === 0) {
-        $uploadDir = __DIR__ . '/../uploads/';
-        if (!is_dir($uploadDir)) {
-            mkdir($uploadDir, 0777, true); // Crée le dossier s'il n'existe pas
-        }
-        $imagePath = $uploadDir . basename($image['name']);
-        move_uploaded_file($image['tmp_name'], $imagePath);
-    }
 
-    // Insertion de l'utilisateur dans la base de données
-    $stmt = $cnx->prepare("INSERT INTO UTILISATEUR (ID_CLUB, NOM_UTI, PRENOM_UTI, SEXE_UTI, PASSWORD_UTI, IMAGE_UTI, DATE_INSCRIPTION) 
-                           VALUES (:id_club, :nom, :prenom, :sexe, :password, :image, NOW())");
+    $idClubPrincipal = (int) $club_principal;
 
-    $stmt->bindParam(':id_club', $idClub, PDO::PARAM_INT);
-    $stmt->bindParam(':nom', $nom);
-    $stmt->bindParam(':prenom', $prenom);
-    $stmt->bindParam(':sexe', $sexe);
-    $stmt->bindParam(':password', $password);
-    $stmt->bindParam(':image', $imagePath);
-    $stmt->execute();
+    
+    
 
-    // Récupération de l'ID de l'utilisateur inséré
-    $userId = $cnx->lastInsertId();
+    // Vérification si les mots de passe correspondent
+    if ($password !== $password_confirm) {
+        echo "Erreur : les mots de passe ne correspondent pas.";
+    } else {
+        // Continuer seulement si les mots de passe correspondent
 
-    // Insertion des abonnements aux clubs sélectionnés
-    if (!empty($clubsChoisis)) {
-        $stmtAbonnement = $cnx->prepare("INSERT INTO S_ABONNER (ID_UTI, ID_CLUB) VALUES (:id_uti, :id_club)");
-        foreach ($clubsChoisis as $clubId) {
-            // Vérifier l'existence de chaque club avant d'insérer
-            $stmtCheckClub->bindParam(':id_club', $clubId, PDO::PARAM_INT);
-            $stmtCheckClub->execute();
-            $clubExists = $stmtCheckClub->fetchColumn() > 0;
+        // Vérification de l'unicité de l'email
+        $stmtCheckEmail = $cnx->prepare("SELECT COUNT(*) FROM UTILISATEUR WHERE MAIL_UTI = :email");
+        $stmtCheckEmail->bindParam(':email', $email);
+        $stmtCheckEmail->execute();
+        $emailExists = $stmtCheckEmail->fetchColumn() > 0;
 
-            if ($clubExists) {
-                $stmtAbonnement->bindParam(':id_uti', $userId);
-                $stmtAbonnement->bindParam(':id_club', $clubId, PDO::PARAM_INT);
-                $stmtAbonnement->execute();
+        if ($emailExists) {
+            echo "Erreur : cet email est déjà utilisé. Veuillez en choisir un autre.";
+        } else {
+            // Traitement de l'image de profil
+            $imagePath = '';
+            if ($image && $image['error'] === 0) {
+                $uploadDir = __DIR__ . '/../uploads/';
+                if (!is_dir($uploadDir)) {
+                    mkdir($uploadDir, 0777, true);
+                }
+                $imagePath = $uploadDir . basename($image['name']);
+                move_uploaded_file($image['tmp_name'], $imagePath);
             }
+
+            // Hachage du mot de passe pour la sécurité
+            $hashedPassword = password_hash($password, PASSWORD_BCRYPT);
+
+            // Insertion de l'utilisateur dans la base de données
+            $stmt = $cnx->prepare("INSERT INTO UTILISATEUR (ID_CLUB, NOM_UTI, PRENOM_UTI, SEXE_UTI, PASSWORD_UTI, IMAGE_UTI, MAIL_UTI, DATE_INSCRIPTION) 
+            VALUES (:id_club_principal, :nom, :prenom, :sexe, :password, :image, :email, NOW())");
+
+            $stmt->bindParam(':id_club_principal', $idClubPrincipal, PDO::PARAM_INT);
+            $stmt->bindParam(':nom', $nom);
+            $stmt->bindParam(':prenom', $prenom);
+            $stmt->bindParam(':sexe', $sexe);
+            $stmt->bindParam(':password', $hashedPassword);
+            $stmt->bindParam(':image', $imagePath);
+            $stmt->bindParam(':email', $email);
+            $stmt->execute();
+
+            echo "Inscription réussie !";
         }
     }
-
-    echo "Inscription réussie !"; // Message de succès
 }
-require_once __DIR__ . '/../views/page2_view.php';  // Appelle la vue
 
-?>
+
+require_once __DIR__ . '/../views/page2_view.php'; // Appelle la vue

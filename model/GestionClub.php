@@ -15,10 +15,10 @@ class GestionClub {
 
     // Méthode pour récupérer tous les clubs de Ligue 1
     public function getAllClubs(): array {
-        $sql = "SELECT NOM_CLUB, LIGUE_CLUB FROM CLUB WHERE LIGUE_CLUB = 'L1'";
+        $sql = "SELECT ID_CLUB, NOM_CLUB, LIGUE_CLUB FROM CLUB WHERE LIGUE_CLUB = 'L1'";
         $stmt = $this->cnx->prepare($sql);
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
+    
 }
-?>

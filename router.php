@@ -1,16 +1,5 @@
 <?php
 
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/PHPClass.php to edit this template
- */
-
-/**
- * Description of Router
- *
- * @author 
- */
-
 class Router {
     private array $routes;
 
@@ -60,8 +49,37 @@ switch ($page) {
     case 'page3':
         require_once 'controller/c_page3.php';
         break;
+    case 'page4' :
+        require_once 'controller/c_page4.php';
+        break;
+    case 'admin_m1' :
+        require_once 'controller/admin_m1.php';
+        break;
+    case 'admin_m2' :
+        require_once 'controller/admin_m2.php';
+        break;
+    case 'admin_m3' :
+        require_once 'controller/admin_m3.php';
+        break;
+    case 'mon_compte' :
+        require_once 'controller/mon_compte.php';
+        break;
+    case 'deconnexion':  // Nouvelle case pour gérer la déconnexion
+        require_once 'controller/deconnexion.php';
+        break;
+    case 'main':
+        require_once 'controller/c_main.php';
+        break;
+    case 'news':
+        require_once 'controller/c_news.php';
+        break;
+    case 'add_news':
+        require_once 'controller/c_news.php';
+        break;
+    case 'add_comment':
+        require_once 'controller/c_add_comment.php';
+        break;
     default:
         echo "Page non trouvée.";
         break;
 }
-?>

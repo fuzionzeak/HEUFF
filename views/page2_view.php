@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
     <title>Inscription</title>
     <link rel="stylesheet" href="/HEUFF/css/style.css">
 </head>
@@ -33,9 +34,11 @@
 
         <label for="password">Mot de passe :</label>
         <input type="password" id="password" name="password" required>
+        <span id="password-error" style="color:red;"></span>
 
         <label for="password_confirm">Confirmer le mot de passe :</label>
         <input type="password" id="password_confirm" name="password_confirm" required>
+
 
         <label for="image">Image de profil :</label>
         <input type="file" id="image" name="image" accept="image/*"><br>
@@ -67,22 +70,41 @@
                 </label>
             <?php endforeach; ?>
         </div>
+        <div class="g-recaptcha" data-sitekey="6LeN3HUqAAAAAPOz3uqrhHV_265YZ_aBtyfvbyRr"></div>
         <button type="submit">S'inscrire</button>
     </form>
 
 
 </main>
+
+ <!-- MOTS DE PASSES -->
 <script>
 document.querySelector('form').addEventListener('submit', function(e) {
     var password = document.getElementById('password').value;
-    var confirmPassword = document.getElementById('confirm_password').value;
+    var confirmPassword = document.getElementById('password_confirm').value;
+    var passwordError = document.getElementById('password-error');
 
+    var passwordStrengthRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{8,}$/;
+
+    // Vérification de la correspondance des mots de passe
     if (password !== confirmPassword) {
         e.preventDefault();  // Empêche l'envoi du formulaire
         alert('Les mots de passe ne correspondent pas.');
+        return;
+    }
+
+    // Vérification de la force du mot de passe
+    if (!passwordStrengthRegex.test(password)) {
+        e.preventDefault();  // Empêche l'envoi du formulaire
+        passwordError.textContent = 'Le mot de passe doit contenir au moins 8 caractères, dont une majuscule, une minuscule, un chiffre et un caractère spécial.';
+    } else {
+        passwordError.textContent = '';
     }
 });
 </script>
+
+
+<!-- AJAX MAIL ALREADY USED IN BDD -->
 <script>
 $(document).ready(function() {
     // Détecter quand l'utilisateur quitte le champ email
